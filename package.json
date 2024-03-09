@@ -1,0 +1,24 @@
+{
+  "name": "common",
+  "version": "1.0.0",
+  "description": "Seleccionador de idioma mediante base de datos",
+  "main": "app.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimuladorDeFarm/Seleccioandor-Idioma.git"
+  },
+  "author": "SimuladorDeFarm",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SimuladorDeFarm/Seleccioandor-Idioma/issues"
+  },
+  "homepage": "https://github.com/SimuladorDeFarm/Seleccioandor-Idioma#readme",
+  "dependencies": {
+    "express": "^4.18.3",
+    "mongoose": "^8.2.1",
+    "readline-sync": "^1.4.10"
+  }
+}
