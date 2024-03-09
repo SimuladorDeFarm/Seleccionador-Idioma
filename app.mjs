@@ -1,7 +1,10 @@
 //permite el uso de readline-sync para input asyncrono
 import readlineSync from 'readline-sync'
-
 import mongoose from 'mongoose'
+
+
+//BASE DE DATOS
+//-------------------------------------------------------------------
 
 const url = 'mongodb://localhost/idiomas_db'
 
@@ -48,9 +51,17 @@ mongoose.connect(url, {
   //establece que idioma se usará, idiomasArray[i][idioma]
   // i es igual al id de la frase, identifica que frase debe colocar
   //idioma es la variable idioma y establace el idioma de la frase
-  let idiomaDB = "espannol"
+  let idiomaDB = "ingles"
   let idioma = idiomaDB
 
+
+
+
+
+
+
+// INTERFAZ
+//-------------------------------------------------------------------------
 
 //se llama esta funcion cad vez que se quiera colocar un imput
 //la funcion devuelve el imput
@@ -65,27 +76,37 @@ function lineaSeparadora(){
   console.log("--------------------");
 }
 
-//opciones del menu principal
-function opciones(){
 
-  //let opcion1 = "1.-Juego nuevo"  
-  //let opcion2 = "2.-Cargar partida"  
-  //let opcion3 = "3.-Idioma" 
 
-  
-    
+
+// funcion menu() es la primera en ejecutarse
+async function menu(){
+
+  await mostrar();
+
+  console.log("Menu:");
+
+  //imprime una linea de -----
+  lineaSeparadora();
+
+  //muestra las 3 opciones del menu y hay qyue escoger una
   console.log("1.-" +idiomasArray[1][idioma])
   console.log("2.-" +idiomasArray[2][idioma])
   console.log("3.-" +idiomasArray[3][idioma])
   console.log("\n")
-}
 
-//en el caso de selcionar la opcion 3 del menu proncipal
-function opcion3(){
-  
-  
-    console.log("1.-seleccionar idioma");
-    console.log("2.-Cargar lista de idiomas");
+
+  // llama la funcion input que devuelve el input del usuario
+  let variable_input = input();
+
+  //imprime una linea de -----
+  lineaSeparadora();
+
+  //en el caso de escojer la tercera opcion del menu -> 3.- Idiomas
+  if(variable_input == 3)
+    
+    console.log("1.-"+ idiomasArray[4][idioma]);
+    console.log("2.-" +idiomasArray[5][idioma]);
 
     // llama la funcion input que devuelve el input del usuario
     let variable_inputinput = input();
@@ -102,31 +123,6 @@ function opcion3(){
     }
 
   
-}
-
-
-// funcion menu() es la primera en ejecutarse
-async function menu(){
-
-  await mostrar();
-
-  console.log("Menu:");
-
-  //imprime una linea de -----
-  lineaSeparadora();
-
-  //muestra las 3 opciones del menu y hay qyue escoger una
-  opciones();
-
-  // llama la funcion input que devuelve el input del usuario
-  let variable_input = input();
-
-  //imprime una linea de -----
-  lineaSeparadora();
-
-  //en el caso de escojer la tercera opcion del menu -> 3.- Idiomas
-  if(variable_input == 3)
-    opcion3();
 
 }
 
