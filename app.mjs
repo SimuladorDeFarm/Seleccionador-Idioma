@@ -2,11 +2,11 @@
 import readlineSync from 'readline-sync'
 import mongoose from 'mongoose'
 
+const url = 'mongodb://localhost/idiomas_db'
 
-//BASE DE DATOS
+//BASE DE DATOS IDIOMA
 //-------------------------------------------------------------------
 
-const url = 'mongodb://localhost/idiomas_db'
 
 mongoose.connect(url, {
 
@@ -25,12 +25,6 @@ mongoose.connect(url, {
     
     const IdiomaModel =  mongoose.model('idiomas', idiomaSchema)
 
-    //mostar
-    //const mostrar = async () =>{
-    //    const idiomas = await IdiomaModel.find()
-    //    console.log(idiomas)
-    //}
-    
     let idiomasArray = {}
     const mostrar = async () => {
       try {
@@ -47,12 +41,63 @@ mongoose.connect(url, {
           console.error('Error al mostrar idiomas:', error);
       }
   };
+
+// BASE DE DATOS CONFIGURACION 
+//-----------------------------------------------------------------------  
+
+  mongoose.connect(url, {
+
+  })
+    .then(()=> console.log('CONECTADO A MONGO 2'))
+    .catch( (e)=> console.log('El error de conexion es: ' + e))
+
+    const configSchema = mongoose.Schema({
+    
+      config: String
+     
   
+  }, {versionKey: false})
+
+  const configModel =  mongoose.model('juans', configSchema)
+
+
+  let configuracionArray = {}
+  const mostrar_configuracion = async () => {
+    try {
+        const configuracion = await configModel.find();
+        configuracionArray = configuracion.map(config1 => ({
+            
+    
+            config: config1.config
+            
+        }));
+        
+        console.log(configuracionArray[1].config);
+
+    } catch (error) {
+        console.error('Error al mostrar configuraciones:', error);
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //establece que idioma se usará, idiomasArray[i][idioma]
   // i es igual al id de la frase, identifica que frase debe colocar
   //idioma es la variable idioma y establace el idioma de la frase
-  let idiomaDB = "ingles"
-  let idioma = idiomaDB
 
 
 
@@ -81,13 +126,19 @@ function lineaSeparadora(){
 
 // funcion menu() es la primera en ejecutarse
 async function menu(){
-
+  
+  await mostrar_configuracion();
   await mostrar();
+
+  let idiomaDB = configuracionArray[0].config
+  let idioma = idiomaDB
+
 
   console.log("Menu:");
 
   //imprime una linea de -----
   lineaSeparadora();
+
 
   //muestra las 3 opciones del menu y hay qyue escoger una
   console.log("1.-" +idiomasArray[1][idioma])
