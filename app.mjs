@@ -53,12 +53,13 @@ mongoose.connect(url, {
 
     const configSchema = mongoose.Schema({
     
+      id: Number,
       config: String
      
   
   }, {versionKey: false})
 
-  const configModel =  mongoose.model('juans', configSchema)
+  const configModel =  mongoose.model('confidiomas', configSchema)
 
 
   let configuracionArray = {}
@@ -66,31 +67,37 @@ mongoose.connect(url, {
     try {
         const configuracion = await configModel.find();
         configuracionArray = configuracion.map(config1 => ({
-            
+        
+
     
             config: config1.config
             
         }));
         
-        console.log(configuracionArray[1].config);
+        imprimir();
+        //console.log(configuracionArray[1].config);
 
     } catch (error) {
         console.error('Error al mostrar configuraciones:', error);
     }
 };
 
+const imprimir = async () =>{
+  const confIdiomas = await configModel.find()
+  console.log(confIdiomas)
+}
 
 
-
-
-
-
-
-
-
-
-
-
+    //editar
+    const actualizar = async (id)=>{
+      const confIdiomas = await configModel.updateOne({_id:id},
+          {
+              $set:{
+                  config: "espannol"
+              }
+          }
+          )
+  }
 
 
 
@@ -101,9 +108,9 @@ mongoose.connect(url, {
 
 
 
-
-
-
+  await mostrar_configuracion();
+  await actualizar('65f11bdd31728073c0bcf3ef');
+  imprimir();
 
 // INTERFAZ
 //-------------------------------------------------------------------------
@@ -130,7 +137,7 @@ async function menu(){
   await mostrar_configuracion();
   await mostrar();
 
-  let idiomaDB = configuracionArray[0].config
+  let idiomaDB = configuracionArray[1].config
   let idioma = idiomaDB
 
 
@@ -178,4 +185,4 @@ async function menu(){
 }
 
 //inicia el programa
-menu();
+//menu();
