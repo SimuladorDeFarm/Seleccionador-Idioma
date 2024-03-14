@@ -45,6 +45,7 @@ mongoose.connect(url, {
 // BASE DE DATOS CONFIGURACION 
 //-----------------------------------------------------------------------  
 
+  let var_config;
   mongoose.connect(url, {
 
   })
@@ -89,13 +90,17 @@ const imprimir = async () =>{
 
 
     //editar
-    const actualizar = async (id)=>{
+    const actualizar = async (id, var_config)=>{
       const confIdiomas = await configModel.updateOne({_id:id},
           {
+            
               $set:{
-                  config: "espannol"
+                  config: var_config
+                  
               }
+              
           }
+          
           )
   }
 
@@ -108,9 +113,9 @@ const imprimir = async () =>{
 
 
 
-  await mostrar_configuracion();
-  await actualizar('65f11bdd31728073c0bcf3ef');
-  imprimir();
+  //await mostrar_configuracion();
+  //await actualizar('65f11bdd31728073c0bcf3ef');
+  //imprimir();
 
 // INTERFAZ
 //-------------------------------------------------------------------------
@@ -129,7 +134,33 @@ function lineaSeparadora(){
 }
 
 
+//esta funcion le pregunta al usario que idioma quiere usar 
+//y al escojer modifica la base de datos colocando ese idioma como el ultimo escogido
+async function menuTest(){
 
+  await mostrar_configuracion();
+  await mostrar();
+
+  console.log('1.- Espannol')
+  console.log('2.- Ingles')
+
+  let variable_input = input();
+
+  if(variable_input == 1){
+    var_config = 'espannol'
+    console.log('escogiste espannol')
+  }
+  if(variable_input == 2){
+    var_config = 'ingles'
+    console.log('escogiste ingles')
+  }
+
+ 
+  lineaSeparadora();
+  await actualizar('65f11bdd31728073c0bcf3ef', var_config);
+  
+  imprimir();
+}
 
 // funcion menu() es la primera en ejecutarse
 async function menu(){
@@ -180,9 +211,10 @@ async function menu(){
       
     }
 
-  
+    
 
 }
 
 //inicia el programa
 //menu();
+menuTest()
