@@ -31,11 +31,14 @@ Base de datos   ---> mongoDB
 
 --------------------------------------------------
 COMO EJECUTAR EL PROGRAMA 
+(LA BASE DE DATOS NO ES CREADA POR EL PROGRAMA, FUE CREADA MANUALMENTE
+EN VERSIONES POSTERIORES SE AÑADIRÁ LA FUNCION)
+
 
 Instalaciones:
 - Nodejs
 - MongoDB
-  (busca en google o preguntale a chatgpt)
+
 
 Dependencias necesarias(sirve cualquier version posterior):
 
