@@ -75,7 +75,7 @@ mongoose.connect(url, {
             
         }));
         
-        imprimir();
+        //imprimir();
         //console.log(configuracionArray[1].config);
 
     } catch (error) {
@@ -165,10 +165,14 @@ async function menuTest(){
 // funcion menu() es la primera en ejecutarse
 async function menu(){
   
+  let on = true;
+  while(on){
+    
+  
   await mostrar_configuracion();
   await mostrar();
 
-  let idiomaDB = configuracionArray[1].config
+  let idiomaDB = configuracionArray[0].config
   let idioma = idiomaDB
 
 
@@ -182,9 +186,10 @@ async function menu(){
   console.log("1.-" +idiomasArray[1][idioma])
   console.log("2.-" +idiomasArray[2][idioma])
   console.log("3.-" +idiomasArray[3][idioma])
+  console.log("4.- salir")
   console.log("\n")
 
-
+  
   // llama la funcion input que devuelve el input del usuario
   let variable_input = input();
 
@@ -192,29 +197,52 @@ async function menu(){
   lineaSeparadora();
 
   //en el caso de escojer la tercera opcion del menu -> 3.- Idiomas
-  if(variable_input == 3)
+  if(variable_input == 3){
     
     console.log("1.-"+ idiomasArray[4][idioma]);
     console.log("2.-" +idiomasArray[5][idioma]);
 
     // llama la funcion input que devuelve el input del usuario
-    let variable_inputinput = input();
-
-    if(variable_inputinput == 1){
-      console.log('Apretaste seleccionar idioma');
+    let variable_input2 = input();
+    
+    if(variable_input2 == 1){
+      
+    
+      console.log('1.- Espannol')
+      console.log('2.- Ingles')
+    
+      let variable_input3 = input();
+    
+      if(variable_input3 == 1){
+        var_config = 'espannol'
+        console.log('escogiste espannol')
+      }
+      if(variable_input3 == 2){
+        var_config = 'ingles'
+        console.log('escogiste ingles')
+      }
+    
+     
+      lineaSeparadora();
+      await actualizar('65f11bdd31728073c0bcf3ef', var_config);
       
       
     }
-    if(variable_inputinput == 2){
+    if(variable_input2 == 2){
       console.log('Apretaste actualizar lista de idiomas');
       
       
     }
+  }
+  if(variable_input == 4){
 
-    
-
+    process.exit();
+  }
+  }
+ 
 }
 
 //inicia el programa
-//menu();
-menuTest()
+
+menu();
+//menuTest()
